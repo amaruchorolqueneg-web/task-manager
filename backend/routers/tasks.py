@@ -36,11 +36,11 @@ def create_task(
 
 #------OBTENER UNA TAREA-------------------------#
 
-@router.get("/{task_id}", response_moel=schemas.TaskResponse)
+@router.get("/{task_id}", response_model=schemas.TaskResponse)
 def get_task(
     task_id: int,
     db: Session = Depends(get_db),
-    current_user: models.user = Depends(auth.get_current_user)
+    current_user: models.User = Depends(auth.get_current_user)
 ):
     """Devuelve una tarea especifica del usuario autenticado"""
 
@@ -102,7 +102,7 @@ def update_task(
 def delete_task(
     task_id: int,
     db: Session = Depends(get_db),
-    current_user: models.User = Depends(auth_current_user)
+    current_user: models.User = Depends(auth.get_current_user)
 ):
     """Elimina una tarea del usuario autenticado"""
 

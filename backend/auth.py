@@ -19,7 +19,7 @@ ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
 
 # Contexto para hashear contraseñas con bcrypt
-pwd_context = CryptContext(schemes["bcrypt"], deprecated="auto")
+pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 # Le dice a FastAPI donde esta el endpoint de login para pedir el token 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="users/login")
@@ -49,7 +49,7 @@ def create_acces_token(data: dict, expires_delta: Optional[timedelta] = None) ->
     to_encode.update({"exp": expire})
 
     # Firmamos el oken con nuestra clave secreta
-    encoded_jwt = jwt.encoded(to-encode, SECRET_KEY, algorithm=ALGORITHM)
+    encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
     return encoded_jwt
 
 #----USUARIO ACTUAL-----------------#
@@ -61,15 +61,15 @@ def get_current_user(
     """Extrae y valida el token JWT, devuelve el usuario autenticado"""
 
     credentials_exception = HTTPException(
-        status_code=status.HTTP_401_UNAUTHORIZED
-        detail="No se pudo validar credenciales"
+        status_code=status.HTTP_401_UNAUTHORIZED,
+        detail="No se pudo validar credenciales",
         headers={"WWW-Authenticate": "Bearer"}
     )
 
 
     try:
         # Decodificamos el token
-        payload = jwt.decode(token, SECRET_KEY algorithms=[ALGORITHM])
+        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
         username: str = payload.get("sub")
 
 

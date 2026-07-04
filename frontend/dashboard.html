@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Manager - Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="dashboard">
+
+        <!-- Header -->
+        <div class="dashboard-header">
+            <h1>Mis Tareas</h1>
+            <button class="btn-logout" onclick="logout()">Cerrar sesión</button>
+        </div>
+
+        <!-- Formulario nueva tarea -->
+        <div class="new-task-form">
+            <h2>Nueva tarea</h2>
+            <input type="text" id="task-title" placeholder="Título de la tarea">
+            <input type="text" id="task-description" placeholder="Descripción (opcional)">
+            <button class="btn btn-primary" onclick="createTask()">Agregar tarea</button>
+        </div>
+
+        <!-- Mensaje de error -->
+        <div class="error" id="error-msg"></div>
+
+        <!-- Lista de tareas -->
+        <div class="tasks-list" id="tasks-list">
+            <!-- Las tareas se cargan dinámicamente con JavaScript -->
+        </div>
+
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
